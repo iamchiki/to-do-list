@@ -5,6 +5,7 @@ let todoList = document.querySelector('.todo-list');
 
 //Event listerner
 todoButton.addEventListener('click', addTodo);
+todoList.addEventListener('click', deleteLiItem);
 
 
 //functions
@@ -40,4 +41,20 @@ function addTodo(event) {
 
   // clear input after padding
   todoInput.value = '';
+}
+
+function deleteLiItem(e) {
+
+  let targetItem = e.target;
+  let parentInput = targetItem.closest('.todo');
+
+  // delete todoInput
+  if (targetItem.matches('.trash-btn') || targetItem.matches('.fa-trash')) {
+    parentInput.remove();
+  }
+
+  // to check for task completion
+  if (targetItem.matches('.complete-btn') || targetItem.matches('.fa-check')) {
+    parentInput.classList.toggle('completed');
+  }
 }
