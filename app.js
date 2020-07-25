@@ -5,7 +5,7 @@ let todoList = document.querySelector('.todo-list');
 
 //Event listerner
 todoButton.addEventListener('click', addTodo);
-todoList.addEventListener('click', deleteLiItem);
+todoList.addEventListener('click', deleteCheck);
 
 
 //functions
@@ -43,14 +43,19 @@ function addTodo(event) {
   todoInput.value = '';
 }
 
-function deleteLiItem(e) {
+function deleteCheck(e) {
 
   let targetItem = e.target;
   let parentInput = targetItem.closest('.todo');
 
   // delete todoInput
   if (targetItem.matches('.trash-btn') || targetItem.matches('.fa-trash')) {
-    parentInput.remove();
+    // adding animation in delete functionality
+    parentInput.classList.add('animation');
+    // input remove
+    parentInput.addEventListener('transitionend', function () {
+      parentInput.remove();
+    });
   }
 
   // to check for task completion

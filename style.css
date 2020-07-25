@@ -89,3 +89,8 @@ form button:hover {
   text-decoration: line-through;
   opacity: 0.5;
 }
+
+.animation {
+  transform: translateX(8rem);
+  opacity: 0;
+}
