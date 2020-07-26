@@ -2,10 +2,12 @@
 let todoButton = document.querySelector('.todo-button');
 let todoInput = document.querySelector('.todo-input');
 let todoList = document.querySelector('.todo-list');
+let filterOption = document.querySelector('.filter-todo');
 
 //Event listerner
 todoButton.addEventListener('click', addTodo);
 todoList.addEventListener('click', deleteCheck);
+filterOption.addEventListener('click', filterTodo);
 
 
 //functions
@@ -61,5 +63,34 @@ function deleteCheck(e) {
   // to check for task completion
   if (targetItem.matches('.complete-btn') || targetItem.matches('.fa-check')) {
     parentInput.classList.toggle('completed');
+  }
+}
+
+function filterTodo(e) {
+
+  let optionVal = e.target.value;
+  let todos = todoList.children;
+
+  for (let val of todos) {
+
+    switch (optionVal) {
+      case 'completed':
+        if (val.matches('.completed')) {
+          val.style.display = 'flex';
+        } else {
+          val.style.display = 'none';
+        }
+        break;
+      case 'pending':
+        if (!val.matches('.completed')) {
+          val.style.display = 'flex';
+        } else {
+          val.style.display = 'none';
+        }
+        break;
+      case 'all':
+        val.style.display = 'flex';
+        break;
+    }
   }
 }
